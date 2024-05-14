@@ -44,7 +44,7 @@ class ToViewController : UIViewController {
     lazy var smallRectangle : UIView = {
         smallRectangle = UIView()
         smallRectangle.translatesAutoresizingMaskIntoConstraints = false
-        smallRectangle.backgroundColor = .yellow
+        smallRectangle.backgroundColor = .green
         smallRectangle.layer.cornerRadius = 10
         return smallRectangle
     }()

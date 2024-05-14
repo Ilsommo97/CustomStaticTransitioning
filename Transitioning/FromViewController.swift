@@ -33,7 +33,7 @@ class FromViewController: UIViewController, UIViewControllerTransitioningDelegat
     lazy var smallRectangle : UIView = {
         smallRectangle = UIView()
         smallRectangle.translatesAutoresizingMaskIntoConstraints = false
-        smallRectangle.backgroundColor = .blue
+        smallRectangle.backgroundColor = .green
         smallRectangle.layer.cornerRadius = 10
         return smallRectangle
     }()
