@@ -12,7 +12,7 @@ Achieving nice and smooth animation when navigating between view controllers in 
 
 Below you can find a example of the StaticTransition class used for a simple App. 
 The app is composed of two view controllers, the first view controller looks like this:
-/images/FromVC.png
+![FromVC]/images/FromVC.png
 
 ## Navigation controller case : push or pop
 
