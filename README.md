@@ -9,10 +9,10 @@ Achieving nice and smooth animation when navigating between view controllers in 
 - the match methods won’t probably work for views that are subviews of more complex view. In particular, the frame that of these views needs to be converted into the global coordinate system. Think of a cell in a collection view: the frame property returns a frame in the collection view coordinate system
 
 ## A working example
-
+<img src="images/FromVC.png" alt="From VC" width="360" height="800"/>
 Below you can find a example of the StaticTransition class used for a simple App. 
 The app is composed of two view controllers, the first view controller looks like this:
-<img src="images/FromVC.png" alt="From VC" width="360" height="800"/>
+
 
 ## Navigation controller case : push or pop
 
