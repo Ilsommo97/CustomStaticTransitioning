@@ -78,8 +78,16 @@ class FromViewController: UIViewController, UIViewControllerTransitioningDelegat
         toVC.modalPresentationStyle = .fullScreen
         toVC.transitioningDelegate = transitionClass
         transitionClass.matchGeometryUIImageViews(fromImageView: self.littleImageView, toImageView: toVC.littleImageView)
+        
         transitionClass.matchSimpleUIViewGeometry(fromView: smallRectangle, toView: toVC.smallRectangle)
-      //  transitionClass.addCustomView(view: self.titleLabel) // this function will create a dummy version of this view that its going to be added to the container view. This menas that we need a second function that defines the animation. In the completion block of the function, the user defines the animation of the added view
+        
+        transitionClass.addNonMatchingView(customView: self.titleLabel,
+                                           animatableProperties: AnimatableProperties(
+                                            transform: CGAffineTransform(translationX: 200, y: 0),
+                                            alpha: 0.6
+                                           )
+                                           
+        )
         self.present(toVC, animated: true)
         
         //MARK: -- Navigation controller transition case

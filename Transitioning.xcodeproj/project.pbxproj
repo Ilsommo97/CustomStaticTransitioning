@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		832491852BF3B11C002D399A /* AnimatableProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832491842BF3B11C002D399A /* AnimatableProperties.swift */; };
 		834588EE2BEA8B8F00639BC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834588ED2BEA8B8F00639BC1 /* AppDelegate.swift */; };
 		834588F02BEA8B8F00639BC1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834588EF2BEA8B8F00639BC1 /* SceneDelegate.swift */; };
 		834588F22BEA8B8F00639BC1 /* FromViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834588F12BEA8B8F00639BC1 /* FromViewController.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		832491842BF3B11C002D399A /* AnimatableProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableProperties.swift; sourceTree = "<group>"; };
 		834588EA2BEA8B8F00639BC1 /* Transitioning.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transitioning.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		834588ED2BEA8B8F00639BC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		834588EF2BEA8B8F00639BC1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +80,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		832491832BF3B106002D399A /* TransitioningGroup */ = {
+			isa = PBXGroup;
+			children = (
+				8345891D2BEA8CC600639BC1 /* TransitionClass.swift */,
+				832491842BF3B11C002D399A /* AnimatableProperties.swift */,
+			);
+			path = TransitioningGroup;
+			sourceTree = "<group>";
+		};
 		834588E12BEA8B8F00639BC1 = {
 			isa = PBXGroup;
 			children = (
@@ -101,7 +112,7 @@
 		834588EC2BEA8B8F00639BC1 /* Transitioning */ = {
 			isa = PBXGroup;
 			children = (
-				8345891D2BEA8CC600639BC1 /* TransitionClass.swift */,
+				832491832BF3B106002D399A /* TransitioningGroup */,
 				834588ED2BEA8B8F00639BC1 /* AppDelegate.swift */,
 				834588EF2BEA8B8F00639BC1 /* SceneDelegate.swift */,
 				8345891F2BEA930200639BC1 /* ToViewController.swift */,
@@ -260,6 +271,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				832491852BF3B11C002D399A /* AnimatableProperties.swift in Sources */,
 				834588F22BEA8B8F00639BC1 /* FromViewController.swift in Sources */,
 				8345891E2BEA8CC600639BC1 /* TransitionClass.swift in Sources */,
 				834588EE2BEA8B8F00639BC1 /* AppDelegate.swift in Sources */,

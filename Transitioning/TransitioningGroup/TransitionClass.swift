@@ -26,14 +26,6 @@ public func calculateZoomInImageFrame(image: UIImage, forView view: UIView) -> C
         }
 }
 
-struct AnimatableProperties {
-    
-    var frame : CGRect
-    
-    var backgroundColor : UIColor
-
-    
-}
 
 
 struct FromAndToView {
@@ -42,6 +34,14 @@ struct FromAndToView {
     
     var toView : UIView
     
+}
+
+struct SnapShotAndProperties {
+    
+    
+    var snapshotView : UIView
+    
+    var properties : AnimatableProperties
 }
 
 class StaticTransition : NSObject,
@@ -61,6 +61,9 @@ class StaticTransition : NSObject,
     var dictionarySimpleUIView : [UIView : FromAndToView] = [:] // A note on this dicionary: the key is made of the animatable uiview. This si the view that is getting created and added to the container view. The struct from and to view instead holds the from and to view passed inside the function that the user calls
     
     var dictionaryImageView : [UIImageView : FromAndToView]  = [:]
+    
+    var dictionaryCustomView : [UIView : SnapShotAndProperties ] = [:]
+    
     
     init(duration : Double, isModal : Bool, fromViewController : UIViewController, springDamping : CGFloat? = nil ){
         
@@ -160,6 +163,7 @@ class StaticTransition : NSObject,
         
     }
     
+    
     // uiimage views functions ... @@@ work in progress @@@
     public func matchGeometryUIImageViews(fromImageView : UIImageView, toImageView: UIImageView){
         
@@ -185,6 +189,7 @@ class StaticTransition : NSObject,
         
         dictionaryImageView[animatableImageView] = customStruct
     }
+    
 
     private func addViews(containerView : UIView){
         
@@ -202,6 +207,13 @@ class StaticTransition : NSObject,
             dictionaryImageView[view]?.toView.isHidden = true
 
             containerView.addSubview(view)
+        })
+        
+        dictionaryCustomView.keys.forEach({
+            view in
+            
+            view.isHidden = true
+            containerView.addSubview(dictionaryCustomView[view]!.snapshotView)
         })
         
         
@@ -239,7 +251,13 @@ class StaticTransition : NSObject,
             }
             
         })
+ 
+        dictionaryCustomView.keys.forEach({
+            view in
+            dictionaryCustomView[view]!.snapshotView.applyAnimatableProperties(  dictionaryCustomView[view]!.properties)
+        })
     }
+    
     private func completionAddedViews(){
         dictionarySimpleUIView.keys.forEach({
             view in
@@ -256,11 +274,17 @@ class StaticTransition : NSObject,
             dictionaryImageView[view]?.toView.isHidden = false
             view.removeFromSuperview()
             
-            
         })
         
+        dictionaryCustomView.keys.forEach({
+            view in
+            
+            view.isHidden = false
+            dictionaryCustomView[view]?.snapshotView.removeFromSuperview()
+        })      
         dictionarySimpleUIView = [ : ]
         dictionaryImageView = [ : ]
+        dictionaryCustomView = [ : ]
     }
     
 
@@ -304,4 +328,32 @@ class StaticTransition : NSObject,
         
     }
             
+}
+
+
+extension StaticTransition {
+    
+    //MARK: -- Extension implementing the addCustomViewToTransition
+    // The public method allows the user to add a custom view to the container view, specifying the animation it should have.
+    
+    public func addNonMatchingView(customView : UIView, animatableProperties : AnimatableProperties){
+        
+        
+        // MARK: -- the custom view added in this method needs to be a view already present in the from view controller or in the to view controller. The animatable properties will be the properties interpolated during the transition.
+        
+        
+        // The view added in here will be transitioned using a snapshot of this same view
+        
+        
+        guard let snapshotView = customView.snapshotView(afterScreenUpdates: false) else {return}
+        
+        let fromViewProp = customView.extractAnimatableProperties()
+        
+        snapshotView.applyAnimatableProperties(fromViewProp)
+        
+        dictionaryCustomView[customView] = SnapShotAndProperties(snapshotView: snapshotView, properties: animatableProperties)
+        
+    }
+    
+    
 }
