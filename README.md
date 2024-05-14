@@ -12,11 +12,11 @@ Achieving nice and smooth animation when navigating between view controllers in 
 Below you can find a example of the StaticTransition class used for a simple App. 
 The app is composed of two view controllers, the first view controller looks like this:
 
-<img src="images/FromVC.png" alt="From VC" width="360" height="700"/>
+<img src="screenshots/FromVC1.png" alt="From VC" width="360" height="700"/>
 
 As you can see, the first from view controller is composed of a  UIImageView whose content mode is set to scale aspect fill, a UILabel, a simple blue UIView and a more complex UIView with subviews in it. The view controller we're transitioning to looks liek this:
 
-<img src="images/ToVC.png" alt="To VC" width="360" height="700"/>
+<img src="screenshots/ToVC1.png" alt="To VC" width="360" height="700"/>
 
 
 
