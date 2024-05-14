@@ -141,8 +141,21 @@ class FromViewController: UIViewController, UIViewControllerTransitioningDelegat
         
         //MARK: -- Navigation controller transition case
         let toVC = ToViewController()
-        let transitionClass = StaticTransition(duration: 0.5, isModal: false, fromViewController: self)
+        let transitionClass = StaticTransition(duration: 2.5, isModal: false, fromViewController: self)
+        //MARK: -- Matching views
         transitionClass.matchGeometryUIImageViews(fromImageView: self.littleImageView, toImageView: toVC.littleImageView)
+        transitionClass.matchSimpleUIViewGeometry(fromView: self.smallRectangle, toView: toVC.smallRectangle)
+        transitionClass.matchSimpleUIViewGeometry(fromView: self.subSubView, toView: toVC.subSubView)
+        
+        //MARK: -- Non matching views
+        transitionClass.addNonMatchingView(view: titleLabel,
+                                           animatablePropertiesFrom: AnimatableProperties(),
+                                           animatablePropertiesTo: AnimatableProperties(transform: CGAffineTransform(translationX: 400, y: 0)),
+                                           isToVC: false
+        )
+        
+        
+        
         navigationController?.pushViewController(toVC, animated: true)
         
     }

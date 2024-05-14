@@ -66,6 +66,8 @@ class StaticTransition : NSObject,
     
     var dictionaryCustomView : [UIView : SnapShotAndProperties ] = [:]
     
+    var dictionaryScreenUpdate : [UIView : Bool] = [:]
+    
     
     init(duration : Double, isModal : Bool, fromViewController : UIViewController, springDamping : CGFloat? = nil ){
         
@@ -212,7 +214,7 @@ class StaticTransition : NSObject,
         
         dictionaryCustomView.keys.forEach({
             view in
-            guard let snapShotView = view.snapshotView(afterScreenUpdates: true) else {return}
+            guard let snapShotView = view.snapshotView(afterScreenUpdates:  dictionaryScreenUpdate[view] ?? false) else {return}
             let propertiesFrom = dictionaryCustomView[view]?.propertiesFrom // the to properties
             let propertiesTo = dictionaryCustomView[view]?.propertiesTo
             snapShotView.applyAnimatableProperties(view.extractAnimatableProperties())
@@ -289,7 +291,8 @@ class StaticTransition : NSObject,
             
             view.isHidden = false
             dictionaryCustomView[view]?.snapshotView.removeFromSuperview()
-        })      
+        })
+        
         dictionarySimpleUIView = [ : ]
         dictionaryImageView = [ : ]
         dictionaryCustomView = [ : ]
@@ -315,9 +318,6 @@ class StaticTransition : NSObject,
         toView.alpha = 0
         containerView.layoutIfNeeded()
         addViews(containerView: containerView)
-        
-
-
       
         self.animator?.addAnimations({
             self.animateAddedViews()
@@ -345,13 +345,17 @@ extension StaticTransition {
     //MARK: -- Extension implementing the addCustomViewToTransition
     // The public method allows the user to add a custom view to the container view, specifying the animation it should have.
     
-    public func addNonMatchingView(customView : UIView,  animatablePropertiesFrom : AnimatableProperties, animatablePropertiesTo : AnimatableProperties){
+    public func addNonMatchingView(view : UIView,  animatablePropertiesFrom : AnimatableProperties, animatablePropertiesTo : AnimatableProperties, isToVC : Bool){
         
         
         // MARK: -- the custom view added in this method needs to be a view already present in the from view controller or in the to view controller. The animatable properties will be the properties interpolated during the transition.
         
         
-        dictionaryCustomView[customView] = SnapShotAndProperties(snapshotView: UIView(), propertiesFrom: animatablePropertiesFrom, propertiesTo: animatablePropertiesTo)
+        dictionaryCustomView[view] = SnapShotAndProperties(snapshotView: UIView(), propertiesFrom: animatablePropertiesFrom, propertiesTo: animatablePropertiesTo)
+        
+        dictionaryScreenUpdate[view] = isToVC
+        
+        
         
     }
     
