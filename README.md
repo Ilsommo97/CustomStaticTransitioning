@@ -18,6 +18,11 @@ As you can see, the first from view controller is composed of a  UIImageView who
 
 <img src="screenshots/ToVC1.png" alt="To VC" width="360" height="700"/>
 
+bla bla bla
+
+<img src="gifs/pushTransition.gif" alt="pish transition" width="360" height="700"/>
+
+
 
 
 
