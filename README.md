@@ -8,11 +8,11 @@ Achieving nice and smooth animation when navigating between view controllers in 
 - UILabel show some issues, since we take snapshots of it. Similarly to UIImageView, it needs proper handling: we probably have to add a specific method for them
 - the match methods won’t probably work for views that are subviews of more complex view. In particular, the frame that of these views needs to be converted into the global coordinate system. Think of a cell in a collection view: the frame property returns a frame in the collection view coordinate system
 
-## Needed addition:
+## A working example
 
-This class will allow to match views that are present in the view controllers that are being transitioned. In general, the container view accessed via the transition context allows to animate whatever we want during the transition duration. We need to add a method to this class that implement such animation for a generic uiview. 
-
-In ReeHeld for example, the top bar and the bottom bar are popped up and down respectively during the transition. This is currently impossible to do using just this class. Coming on this later
+Below you can find a example of the StaticTransition class used for a simple App. 
+The app is composed of two view controllers, the first view controller looks like this:
+./images/FromVC.png
 
 ## Navigation controller case : push or pop
 

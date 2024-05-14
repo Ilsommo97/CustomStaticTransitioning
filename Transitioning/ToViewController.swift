@@ -70,7 +70,7 @@ class ToViewController : UIViewController {
         self.view.addSubview(subSubView)
         
         littleImageView.isUserInteractionEnabled = true
-        littleImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(popNav)))
+        littleImageView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(didPan(_:))))
         NSLayoutConstraint.activate([
             
             littleImageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
@@ -80,16 +80,45 @@ class ToViewController : UIViewController {
 
             smallRectangle.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             smallRectangle.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            smallRectangle.widthAnchor.constraint(equalToConstant: 50),
-            smallRectangle.heightAnchor.constraint(equalToConstant: 25),
+            smallRectangle.widthAnchor.constraint(equalToConstant: 100),
+            smallRectangle.heightAnchor.constraint(equalToConstant: 50),
             
             
             
             subSubView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 50),
             subSubView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20),
-            subSubView.widthAnchor.constraint(equalToConstant: 10),
-            subSubView.heightAnchor.constraint(equalToConstant: 10)
+            subSubView.widthAnchor.constraint(equalToConstant: 100),
+            subSubView.heightAnchor.constraint(equalToConstant: 50),
+            
+            
+            
+            
         ])
+    }
+    
+    
+    @objc func didPan(_ gesture: UIPanGestureRecognizer) {
+        print("pan")
+        switch gesture.state {
+        case .possible:
+            break
+        case .began:
+            break
+        case .changed:
+            break
+        case .ended:
+            break
+        case .cancelled:
+            break
+        case .failed:
+            break
+        default :
+            break
+            
+        }
+        
+        
+        
     }
     
     

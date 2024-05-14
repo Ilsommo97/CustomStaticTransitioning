@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		832491852BF3B11C002D399A /* AnimatableProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832491842BF3B11C002D399A /* AnimatableProperties.swift */; };
+		832491882BF3F718002D399A /* InteractiveTransitionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832491872BF3F718002D399A /* InteractiveTransitionClass.swift */; };
 		834588EE2BEA8B8F00639BC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834588ED2BEA8B8F00639BC1 /* AppDelegate.swift */; };
 		834588F02BEA8B8F00639BC1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834588EF2BEA8B8F00639BC1 /* SceneDelegate.swift */; };
 		834588F22BEA8B8F00639BC1 /* FromViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834588F12BEA8B8F00639BC1 /* FromViewController.swift */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		832491842BF3B11C002D399A /* AnimatableProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableProperties.swift; sourceTree = "<group>"; };
+		832491872BF3F718002D399A /* InteractiveTransitionClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveTransitionClass.swift; sourceTree = "<group>"; };
 		834588EA2BEA8B8F00639BC1 /* Transitioning.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transitioning.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		834588ED2BEA8B8F00639BC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		834588EF2BEA8B8F00639BC1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,13 +82,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		832491832BF3B106002D399A /* TransitioningGroup */ = {
+		832491832BF3B106002D399A /* StaticTransitioningGroup */ = {
 			isa = PBXGroup;
 			children = (
 				8345891D2BEA8CC600639BC1 /* TransitionClass.swift */,
 				832491842BF3B11C002D399A /* AnimatableProperties.swift */,
 			);
-			path = TransitioningGroup;
+			path = StaticTransitioningGroup;
+			sourceTree = "<group>";
+		};
+		832491862BF3F6E1002D399A /* InteractiveTransitioningGroup */ = {
+			isa = PBXGroup;
+			children = (
+				832491872BF3F718002D399A /* InteractiveTransitionClass.swift */,
+			);
+			path = InteractiveTransitioningGroup;
 			sourceTree = "<group>";
 		};
 		834588E12BEA8B8F00639BC1 = {
@@ -112,7 +122,8 @@
 		834588EC2BEA8B8F00639BC1 /* Transitioning */ = {
 			isa = PBXGroup;
 			children = (
-				832491832BF3B106002D399A /* TransitioningGroup */,
+				832491862BF3F6E1002D399A /* InteractiveTransitioningGroup */,
+				832491832BF3B106002D399A /* StaticTransitioningGroup */,
 				834588ED2BEA8B8F00639BC1 /* AppDelegate.swift */,
 				834588EF2BEA8B8F00639BC1 /* SceneDelegate.swift */,
 				8345891F2BEA930200639BC1 /* ToViewController.swift */,
@@ -276,6 +287,7 @@
 				8345891E2BEA8CC600639BC1 /* TransitionClass.swift in Sources */,
 				834588EE2BEA8B8F00639BC1 /* AppDelegate.swift in Sources */,
 				834589202BEA930200639BC1 /* ToViewController.swift in Sources */,
+				832491882BF3F718002D399A /* InteractiveTransitionClass.swift in Sources */,
 				834588F02BEA8B8F00639BC1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

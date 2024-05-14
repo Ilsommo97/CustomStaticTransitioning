@@ -25,7 +25,7 @@ class FromViewController: UIViewController, UIViewControllerTransitioningDelegat
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.text = "A custom class for transitioning!"
         titleLabel.textColor = .orange
-        titleLabel.font = .systemFont(ofSize: 20)
+        titleLabel.font = .systemFont(ofSize: 25)
         return titleLabel
         
     }()
@@ -94,7 +94,7 @@ class FromViewController: UIViewController, UIViewControllerTransitioningDelegat
             littleImageView.heightAnchor.constraint(equalToConstant: 200),
             
             
-            titleLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 200),
+            titleLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20),
             titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             
             smallRectangle.widthAnchor.constraint(equalToConstant: 150),
@@ -102,22 +102,22 @@ class FromViewController: UIViewController, UIViewControllerTransitioningDelegat
             smallRectangle.leadingAnchor.constraint(equalTo: self.littleImageView.trailingAnchor, constant: 20),
             smallRectangle.centerYAnchor.constraint(equalTo: self.littleImageView.centerYAnchor),
             
-            complexView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            complexView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
             complexView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            complexView.widthAnchor.constraint(equalToConstant: 200),
-            complexView.heightAnchor.constraint(equalToConstant: 100),
+            complexView.widthAnchor.constraint(equalToConstant: 300),
+            complexView.heightAnchor.constraint(equalToConstant: 200),
             
             
             subView.leadingAnchor.constraint(equalTo: self.complexView.leadingAnchor, constant: 10),
             subView.centerYAnchor.constraint(equalTo: self.complexView.centerYAnchor),
-            subView.widthAnchor.constraint(equalToConstant: 50),
-            subView.heightAnchor.constraint(equalToConstant: 50),
+            subView.widthAnchor.constraint(equalToConstant: 100),
+            subView.heightAnchor.constraint(equalToConstant: 100),
             
             
             subSubView.leadingAnchor.constraint(equalTo: self.subView.leadingAnchor, constant: 10),
             subSubView.centerYAnchor.constraint(equalTo: self.subView.centerYAnchor),
-            subSubView.widthAnchor.constraint(equalToConstant: 25),
-            subSubView.heightAnchor.constraint(equalToConstant: 25)
+            subSubView.widthAnchor.constraint(equalToConstant: 50),
+            subSubView.heightAnchor.constraint(equalToConstant: 50)
 
         ])
         
@@ -125,26 +125,26 @@ class FromViewController: UIViewController, UIViewControllerTransitioningDelegat
     
     @objc func imageTap(){
         //MARK: -- Modal transition case
-        let toVC = ToViewController()
-        toVC.presentingVC = self
-        let transitionClass = StaticTransition(duration: 0.5, isModal: true, fromViewController: self)
-        toVC.modalPresentationStyle = .fullScreen
-        toVC.transitioningDelegate = transitionClass
-        transitionClass.matchGeometryUIImageViews(fromImageView: self.littleImageView, toImageView: toVC.littleImageView)
-        
-        transitionClass.matchSimpleUIViewGeometry(fromView: smallRectangle, toView: toVC.smallRectangle)
-      
-        transitionClass.addNonMatchingView(customView: self.titleLabel, animatablePropertiesFrom: AnimatableProperties(), animatablePropertiesTo: AnimatableProperties(transform: CGAffineTransform(scaleX: 0.01, y: 0.01)))
-                                           
-        transitionClass.matchSimpleUIViewGeometry(fromView: subSubView, toView: toVC.subSubView)
-        self.present(toVC, animated: true)
+//        let toVC = ToViewController()
+//        toVC.presentingVC = self
+//        let transitionClass = StaticTransition(duration: 0.5, isModal: true, fromViewController: self)
+//        toVC.modalPresentationStyle = .fullScreen
+//        toVC.transitioningDelegate = transitionClass
+//        transitionClass.matchGeometryUIImageViews(fromImageView: self.littleImageView, toImageView: toVC.littleImageView)
+//        
+//        transitionClass.matchSimpleUIViewGeometry(fromView: smallRectangle, toView: toVC.smallRectangle)
+//      
+//        transitionClass.addNonMatchingView(customView: self.titleLabel, animatablePropertiesFrom: AnimatableProperties(), animatablePropertiesTo: AnimatableProperties(transform: CGAffineTransform(scaleX: 0.01, y: 0.01)))
+//                                           
+//        transitionClass.matchSimpleUIViewGeometry(fromView: subSubView, toView: toVC.subSubView)
+//        self.present(toVC, animated: true)
         
         //MARK: -- Navigation controller transition case
-//        let toVC = ToViewController()
-//        let transitionClass = StaticTransition(duration: 0.5, isModal: false, fromViewController: self)
-//        transitionClass.matchGeometryUIImageViews(fromImageView: self.profilePic, toImageView: toVC.smallerProfilePic)
-//        transitionClass.matchSimpleUIViewGeometry(fromView: self.bottomBar, toView: self.topBar)
-//        navigationController?.pushViewController(toVC, animated: true)
+        let toVC = ToViewController()
+        let transitionClass = StaticTransition(duration: 0.5, isModal: false, fromViewController: self)
+        transitionClass.matchGeometryUIImageViews(fromImageView: self.littleImageView, toImageView: toVC.littleImageView)
+        navigationController?.pushViewController(toVC, animated: true)
+        
     }
 
 
