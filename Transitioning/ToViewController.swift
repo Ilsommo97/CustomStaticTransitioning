@@ -12,6 +12,15 @@ class ToViewController : UIViewController {
     
     weak var presentingVC : UIViewController?
 
+    lazy var subView : UIView = {
+        
+        subView = UIView()
+        subView.translatesAutoresizingMaskIntoConstraints = false
+        subView.backgroundColor = .purple
+        subView.layer.cornerRadius = 5
+        return subView
+        
+    }()
     
     lazy var littleImageView : UIImageView = {
         let littleImageView = UIImageView(image: UIImage(named: "vangogh"))
@@ -40,6 +49,15 @@ class ToViewController : UIViewController {
         return smallRectangle
     }()
     
+    lazy var subSubView : UIView = {
+        
+        subSubView = UIView()
+        subSubView.translatesAutoresizingMaskIntoConstraints = false
+        subSubView.backgroundColor = .blue
+        subSubView.layer.cornerRadius = 2
+        return subSubView
+        
+    }()
     
     
     override func viewDidLoad() {
@@ -49,6 +67,7 @@ class ToViewController : UIViewController {
        // self.view.addSubview(titleLabel)
         self.view.addSubview(smallRectangle)
         self.view.backgroundColor = .black
+        self.view.addSubview(subSubView)
         
         littleImageView.isUserInteractionEnabled = true
         littleImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(popNav)))
@@ -62,7 +81,14 @@ class ToViewController : UIViewController {
             smallRectangle.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             smallRectangle.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             smallRectangle.widthAnchor.constraint(equalToConstant: 50),
-            smallRectangle.heightAnchor.constraint(equalToConstant: 25)
+            smallRectangle.heightAnchor.constraint(equalToConstant: 25),
+            
+            
+            
+            subSubView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 50),
+            subSubView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20),
+            subSubView.widthAnchor.constraint(equalToConstant: 10),
+            subSubView.heightAnchor.constraint(equalToConstant: 10)
         ])
     }
     
@@ -85,6 +111,8 @@ class ToViewController : UIViewController {
         let toVC = self.presentingVC as? FromViewController
         self.transitioningDelegate = transitionClass
         transitionClass.matchGeometryUIImageViews(fromImageView: self.littleImageView, toImageView: toVC!.littleImageView )
+        transitionClass.matchSimpleUIViewGeometry(fromView: self.smallRectangle, toView: toVC!.smallRectangle)
+     
         self.dismiss(animated: true)
         
         

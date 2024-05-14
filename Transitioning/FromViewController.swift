@@ -38,6 +38,40 @@ class FromViewController: UIViewController, UIViewControllerTransitioningDelegat
         return smallRectangle
     }()
 
+    
+    lazy var complexView : UIView = {
+        
+        complexView = UIView()
+        complexView.translatesAutoresizingMaskIntoConstraints = false
+        complexView.backgroundColor = .orange
+        complexView.layer.cornerRadius = 20
+        return complexView
+        
+    }()
+    
+    
+    
+    
+    lazy var subView : UIView = {
+        
+        subView = UIView()
+        subView.translatesAutoresizingMaskIntoConstraints = false
+        subView.backgroundColor = .purple
+        subView.layer.cornerRadius = 5
+        return subView
+        
+    }()
+    
+    lazy var subSubView : UIView = {
+        
+        subSubView = UIView()
+        subSubView.translatesAutoresizingMaskIntoConstraints = false
+        subSubView.backgroundColor = .blue
+        subSubView.layer.cornerRadius = 2
+        return subSubView
+        
+    }()
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -46,7 +80,10 @@ class FromViewController: UIViewController, UIViewControllerTransitioningDelegat
         self.view.addSubview(littleImageView)
         self.view.addSubview(titleLabel)
         self.view.addSubview(smallRectangle)
+        self.view.addSubview(complexView)
         
+        self.complexView.addSubview(subView)
+        self.subView.addSubview(subSubView)
         littleImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTap)))
         
         NSLayoutConstraint.activate([
@@ -63,9 +100,25 @@ class FromViewController: UIViewController, UIViewControllerTransitioningDelegat
             smallRectangle.widthAnchor.constraint(equalToConstant: 150),
             smallRectangle.heightAnchor.constraint(equalToConstant: 100),
             smallRectangle.leadingAnchor.constraint(equalTo: self.littleImageView.trailingAnchor, constant: 20),
-            smallRectangle.centerYAnchor.constraint(equalTo: self.littleImageView.centerYAnchor)
-
+            smallRectangle.centerYAnchor.constraint(equalTo: self.littleImageView.centerYAnchor),
             
+            complexView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            complexView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            complexView.widthAnchor.constraint(equalToConstant: 200),
+            complexView.heightAnchor.constraint(equalToConstant: 100),
+            
+            
+            subView.leadingAnchor.constraint(equalTo: self.complexView.leadingAnchor, constant: 10),
+            subView.centerYAnchor.constraint(equalTo: self.complexView.centerYAnchor),
+            subView.widthAnchor.constraint(equalToConstant: 50),
+            subView.heightAnchor.constraint(equalToConstant: 50),
+            
+            
+            subSubView.leadingAnchor.constraint(equalTo: self.subView.leadingAnchor, constant: 10),
+            subSubView.centerYAnchor.constraint(equalTo: self.subView.centerYAnchor),
+            subSubView.widthAnchor.constraint(equalToConstant: 25),
+            subSubView.heightAnchor.constraint(equalToConstant: 25)
+
         ])
         
     }
@@ -80,14 +133,10 @@ class FromViewController: UIViewController, UIViewControllerTransitioningDelegat
         transitionClass.matchGeometryUIImageViews(fromImageView: self.littleImageView, toImageView: toVC.littleImageView)
         
         transitionClass.matchSimpleUIViewGeometry(fromView: smallRectangle, toView: toVC.smallRectangle)
-        
-        transitionClass.addNonMatchingView(customView: self.titleLabel,
-                                           animatableProperties: AnimatableProperties(
-                                            transform: CGAffineTransform(translationX: 200, y: 0),
-                                            alpha: 0.6
-                                           )
+      
+        transitionClass.addNonMatchingView(customView: self.titleLabel, animatablePropertiesFrom: AnimatableProperties(), animatablePropertiesTo: AnimatableProperties(transform: CGAffineTransform(scaleX: 0.01, y: 0.01)))
                                            
-        )
+        transitionClass.matchSimpleUIViewGeometry(fromView: subSubView, toView: toVC.subSubView)
         self.present(toVC, animated: true)
         
         //MARK: -- Navigation controller transition case

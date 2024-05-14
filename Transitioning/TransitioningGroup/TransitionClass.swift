@@ -41,7 +41,9 @@ struct SnapShotAndProperties {
     
     var snapshotView : UIView
     
-    var properties : AnimatableProperties
+    var propertiesFrom : AnimatableProperties
+    
+    var propertiesTo : AnimatableProperties
 }
 
 class StaticTransition : NSObject,
@@ -149,7 +151,7 @@ class StaticTransition : NSObject,
         
         let animatableView = UIView()
         
-        animatableView.frame = fromView.frame
+        animatableView.frame = fromView.frameInGlobalCoordinateSystem() ?? .zero
         animatableView.backgroundColor = fromView.backgroundColor
         animatableView.alpha = fromView.alpha
         animatableView.clipsToBounds = fromView.clipsToBounds
@@ -174,13 +176,12 @@ class StaticTransition : NSObject,
         animatableImageView.clipsToBounds = fromImageView.clipsToBounds
         animatableImageView.alpha = fromImageView.alpha
         // Frame computation in the from
-        let constantView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         if fromImageView.contentMode == .scaleAspectFit {
             animatableImageView.frame = calculateZoomInImageFrame(image: animatableImageView.image!, forView: fromImageView)
             print(" the from image view is in scale aspect fit mode, the frame computed is \(  animatableImageView.frame)")
 
         } else {
-            animatableImageView.frame = fromImageView.frame
+            animatableImageView.frame = fromImageView.frameInGlobalCoordinateSystem() ?? .zero
             print(" the from image view is in scale aspect fill mode, the frame computed is \(  animatableImageView.frame)")
 
         }
@@ -211,9 +212,16 @@ class StaticTransition : NSObject,
         
         dictionaryCustomView.keys.forEach({
             view in
-            
+            guard let snapShotView = view.snapshotView(afterScreenUpdates: true) else {return}
+            let propertiesFrom = dictionaryCustomView[view]?.propertiesFrom // the to properties
+            let propertiesTo = dictionaryCustomView[view]?.propertiesTo
+            snapShotView.applyAnimatableProperties(view.extractAnimatableProperties())
+            snapShotView.applyAnimatableProperties(propertiesFrom!)
+            dictionaryCustomView[view] = SnapShotAndProperties(snapshotView: snapShotView,
+                                                               propertiesFrom: propertiesFrom!,
+                                                               propertiesTo: propertiesTo!)
             view.isHidden = true
-            containerView.addSubview(dictionaryCustomView[view]!.snapshotView)
+            containerView.addSubview(snapShotView)
         })
         
         
@@ -254,7 +262,7 @@ class StaticTransition : NSObject,
  
         dictionaryCustomView.keys.forEach({
             view in
-            dictionaryCustomView[view]!.snapshotView.applyAnimatableProperties(  dictionaryCustomView[view]!.properties)
+            dictionaryCustomView[view]!.snapshotView.applyAnimatableProperties(  dictionaryCustomView[view]!.propertiesTo)
         })
     }
     
@@ -305,9 +313,10 @@ class StaticTransition : NSObject,
         containerView.addSubview(fromView)
         
         toView.alpha = 0
+        containerView.layoutIfNeeded()
         addViews(containerView: containerView)
         
-        containerView.layoutIfNeeded()
+
 
       
         self.animator?.addAnimations({
@@ -336,22 +345,13 @@ extension StaticTransition {
     //MARK: -- Extension implementing the addCustomViewToTransition
     // The public method allows the user to add a custom view to the container view, specifying the animation it should have.
     
-    public func addNonMatchingView(customView : UIView, animatableProperties : AnimatableProperties){
+    public func addNonMatchingView(customView : UIView,  animatablePropertiesFrom : AnimatableProperties, animatablePropertiesTo : AnimatableProperties){
         
         
         // MARK: -- the custom view added in this method needs to be a view already present in the from view controller or in the to view controller. The animatable properties will be the properties interpolated during the transition.
         
         
-        // The view added in here will be transitioned using a snapshot of this same view
-        
-        
-        guard let snapshotView = customView.snapshotView(afterScreenUpdates: false) else {return}
-        
-        let fromViewProp = customView.extractAnimatableProperties()
-        
-        snapshotView.applyAnimatableProperties(fromViewProp)
-        
-        dictionaryCustomView[customView] = SnapShotAndProperties(snapshotView: snapshotView, properties: animatableProperties)
+        dictionaryCustomView[customView] = SnapShotAndProperties(snapshotView: UIView(), propertiesFrom: animatablePropertiesFrom, propertiesTo: animatablePropertiesTo)
         
     }
     

@@ -30,7 +30,7 @@ struct AnimatableProperties {
 extension UIView {
     func applyAnimatableProperties(_ properties: AnimatableProperties) {
         if let frame = properties.frame {
-            self.frame = frame
+            self.frame = self.frameInGlobalCoordinateSystem() ?? .zero
         }
         if let bounds = properties.bounds {
             self.bounds = bounds
@@ -78,6 +78,13 @@ extension UIView {
             self.contentMode = contentMode
         }
     }
+    
+    func frameInGlobalCoordinateSystem() -> CGRect? {
+           guard let window = self.window else {
+               return nil
+           }
+           return self.superview?.convert(self.frame, to: window)
+       }
     
     
     func extractAnimatableProperties() -> AnimatableProperties {
