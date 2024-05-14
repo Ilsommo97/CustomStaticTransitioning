@@ -16,7 +16,7 @@ The app is composed of two view controllers, the first view controller looks lik
 
 As you can see, the first from view controller is composed of a  UIImageView whose content mode is set to scale aspect fill, a UILabel, a simple blue UIView and a more complex UIView with subviews in it. The view controller we're transitioning to looks liek this:
 
-<img src="images/ToVC.png" alt="To VC" width="360" height="700"/>
+<img src="images/ToVC.png" alt="To VC" width="360" height="1200"/>
 
 
 ## Navigation controller case : push or pop
