@@ -14,9 +14,13 @@ The app is composed of two view controllers, the first view controller looks lik
 
 <img src="screenshots/FromVC1.png" alt="From VC" width="360" height="700"/>
 
-As you can see, the first from view controller is composed of a  UIImageView whose content mode is set to scale aspect fill, a UILabel, a simple blue UIView and a more complex UIView with subviews in it. The view controller we're transitioning to looks liek this:
+As you can see, the first from view controller is composed of a  UIImageView whose content mode is set to scale aspect fill, a UILabel, a simple blue UIView and a more complex UIView with subviews in it. The view controller we're transitioning to looks like this:
 
 <img src="screenshots/ToVC1.png" alt="To VC" width="360" height="700"/>
+
+
+
+
 
 
 
