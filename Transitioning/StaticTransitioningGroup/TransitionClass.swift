@@ -247,6 +247,7 @@ class StaticTransition : NSObject,
             view.alpha =                dictionaryImageView[view]?.toView.alpha ?? 1
             view.clipsToBounds =        dictionaryImageView[view]?.toView.clipsToBounds ?? false
             view.layer.cornerRadius =   dictionaryImageView[view]?.toView.layer.cornerRadius ?? 0
+            print("view radius \(view.layer.cornerRadius)")
             view.backgroundColor =      dictionaryImageView[view]?.toView.backgroundColor
 
             if dictionaryImageView[view]?.toView.contentMode == .scaleAspectFill {

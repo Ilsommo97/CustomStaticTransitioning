@@ -141,7 +141,7 @@ class FromViewController: UIViewController, UIViewControllerTransitioningDelegat
         
         //MARK: -- Navigation controller transition case
         let toVC = ToViewController()
-        let transitionClass = StaticTransition(duration: 2.5, isModal: false, fromViewController: self)
+        let transitionClass = StaticTransition(duration: 0.5, isModal: false, fromViewController: self, springDamping: 10)
         //MARK: -- Matching views
         transitionClass.matchGeometryUIImageViews(fromImageView: self.littleImageView, toImageView: toVC.littleImageView)
         transitionClass.matchSimpleUIViewGeometry(fromView: self.smallRectangle, toView: toVC.smallRectangle)

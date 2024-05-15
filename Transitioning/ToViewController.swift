@@ -27,7 +27,6 @@ class ToViewController : UIViewController {
         littleImageView.translatesAutoresizingMaskIntoConstraints = false
         littleImageView.contentMode = .scaleAspectFit
         littleImageView.clipsToBounds = true
-        littleImageView.layer.cornerRadius = 10
         return littleImageView
     }()
     
