@@ -10,18 +10,10 @@ Achieving nice and smooth animation when navigating between view controllers in 
 
 ## A working example
 Below you can find a example of the StaticTransition class used for a simple App. 
-The app is composed of two view controllers, the first view controller looks like this:
-
-<img src="screenshots/FromVC1.png" alt="From VC" width="360" height="700"/>
-
-As you can see, the first from view controller is composed of a  UIImageView whose content mode is set to scale aspect fill, a UILabel, a simple blue UIView and a more complex UIView with subviews in it. The view controller we're transitioning to looks like this:
-
-<img src="screenshots/ToVC1.png" alt="To VC" width="360" height="700"/>
-
-bla bla bla
 
 <img src="gifs/pushTransition.gif" alt="pish transition" width="360" height="700"/>
 
+As you can see, the view controller we're starting the transition from is composed of the following componenets: a UIImageView with content mode set to .scaleAspectFill, a UILabel, a simple green UIView and a more complex UIView with subviews in it. This class currently implements 3 methods that let the user animate views during the transition. In the case you see above, the UIImageView is morphed to the UIImageView in the ToViewController ( the view controller we're transitioning to). A similar animation happens for the blue UIView inside the complex view: this complex view showcase that the class manages to morph views even when they're part of a more complex view hierarchy by using a global coordinate system. Finally, views that are not present in the ToViewController (the UILabel in this case) can also be animated.
 
 
 
