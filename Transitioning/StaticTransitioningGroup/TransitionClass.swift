@@ -151,8 +151,11 @@ class StaticTransition : NSObject,
             print(" Warning:Visual error may arise, since the views you are adding with the matchSimpleViewGeometry function have subviews ")
         }
         
-        let animatableView = UIView()
+        //MARK: -- Let's go over the reasoning behind this method implementation. This method is getting called before the transition is defined. This means that we have access to the frame of the fromView, but the frame of the toView is not yet rendered, and its frame for this same reason results nil when the function get called (i.e toView.frame == .zero now)
+
         
+        
+        let animatableView = UIView()
         animatableView.frame = fromView.frameInGlobalCoordinateSystem() ?? .zero
         animatableView.backgroundColor = fromView.backgroundColor
         animatableView.alpha = fromView.alpha
@@ -229,6 +232,8 @@ class StaticTransition : NSObject,
         
     }
     private func animateAddedViews(){
+        
+        //MARK: -- This method is getting called after the container view has called layoutIfNeeded. This should ensure that each subview of the views in both VCs have now their frame properly defined.
         
         dictionarySimpleUIView.keys.forEach({
             view in

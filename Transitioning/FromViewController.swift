@@ -10,6 +10,17 @@ import UIKit
 class FromViewController: UIViewController, UIViewControllerTransitioningDelegate {
     
     
+    lazy var bottomBar : UIView = {
+       
+        
+        bottomBar = UIView()
+        bottomBar.translatesAutoresizingMaskIntoConstraints = false
+        bottomBar.backgroundColor = UIColor(.blue).withAlphaComponent(0.5)
+        return bottomBar
+    }()
+    
+    
+    
     lazy var littleImageView : UIImageView = {
         let littleImageView = UIImageView(image: UIImage(named: "vangogh"))
         littleImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -77,7 +88,9 @@ class FromViewController: UIViewController, UIViewControllerTransitioningDelegat
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     
-        self.view.addSubview(littleImageView)
+        self.view.addSubview(bottomBar)
+        self.bottomBar.addSubview(littleImageView)
+        
         self.view.addSubview(titleLabel)
         self.view.addSubview(smallRectangle)
         self.view.addSubview(complexView)
@@ -87,9 +100,14 @@ class FromViewController: UIViewController, UIViewControllerTransitioningDelegat
         littleImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTap)))
         
         NSLayoutConstraint.activate([
+            
+            bottomBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            bottomBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            bottomBar.heightAnchor.constraint(equalToConstant: 350),
+            bottomBar.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
         
-            littleImageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant:20),
-            littleImageView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20),
+            littleImageView.leadingAnchor.constraint(equalTo: self.bottomBar.leadingAnchor, constant: 20),
+            littleImageView.bottomAnchor.constraint(equalTo: self.bottomBar.bottomAnchor, constant: -20),
             littleImageView.widthAnchor.constraint(equalToConstant: 200),
             littleImageView.heightAnchor.constraint(equalToConstant: 200),
             
@@ -141,6 +159,7 @@ class FromViewController: UIViewController, UIViewControllerTransitioningDelegat
         
         //MARK: -- Navigation controller transition case
         let toVC = ToViewController()
+        toVC.presentingVC = self
         let transitionClass = StaticTransition(duration: 0.5, isModal: false, fromViewController: self, springDamping: 10)
         //MARK: -- Matching views
         transitionClass.matchGeometryUIImageViews(fromImageView: self.littleImageView, toImageView: toVC.littleImageView)

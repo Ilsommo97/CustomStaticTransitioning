@@ -69,7 +69,8 @@ class ToViewController : UIViewController {
         self.view.addSubview(subSubView)
         
         littleImageView.isUserInteractionEnabled = true
-        littleImageView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(didPan(_:))))
+        littleImageView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(popNav)))
+        
         NSLayoutConstraint.activate([
             
             littleImageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
@@ -93,32 +94,20 @@ class ToViewController : UIViewController {
             
             
         ])
+        
+        setupInteractiveDismiss()
     }
     
-    
-    @objc func didPan(_ gesture: UIPanGestureRecognizer) {
-        print("pan")
-        switch gesture.state {
-        case .possible:
-            break
-        case .began:
-            break
-        case .changed:
-            break
-        case .ended:
-            break
-        case .cancelled:
-            break
-        case .failed:
-            break
-        default :
-            break
-            
-        }
+    func setupInteractiveDismiss(){
         
+        let toVC = ToViewController()
+        let interactiveClass = InteractiveTransitionClass(fromViewController: self, toViewController: toVC, isModal: false)
+        interactiveClass.assignPanGesture(view: self.littleImageView)
         
         
     }
+    
+
     
     
     @objc func popNav(){
