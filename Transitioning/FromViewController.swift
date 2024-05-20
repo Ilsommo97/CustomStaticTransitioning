@@ -61,8 +61,6 @@ class FromViewController: UIViewController, UIViewControllerTransitioningDelegat
     }()
     
     
-    
-    
     lazy var subView : UIView = {
         
         subView = UIView()
@@ -107,7 +105,7 @@ class FromViewController: UIViewController, UIViewControllerTransitioningDelegat
             bottomBar.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
         
             littleImageView.leadingAnchor.constraint(equalTo: self.bottomBar.leadingAnchor, constant: 20),
-            littleImageView.bottomAnchor.constraint(equalTo: self.bottomBar.bottomAnchor, constant: -20),
+            littleImageView.bottomAnchor.constraint(equalTo:  self.bottomBar.bottomAnchor, constant: -20),
             littleImageView.widthAnchor.constraint(equalToConstant: 200),
             littleImageView.heightAnchor.constraint(equalToConstant: 200),
             
@@ -157,10 +155,11 @@ class FromViewController: UIViewController, UIViewControllerTransitioningDelegat
 //        transitionClass.matchSimpleUIViewGeometry(fromView: subSubView, toView: toVC.subSubView)
 //        self.present(toVC, animated: true)
         
+        
         //MARK: -- Navigation controller transition case
         let toVC = ToViewController()
         toVC.presentingVC = self
-        let transitionClass = StaticTransition(duration: 0.5, isModal: false, fromViewController: self, springDamping: 10)
+        let transitionClass = StaticTransition(duration: 10.5, isModal: false, fromViewController: self, springDamping: 10)
         //MARK: -- Matching views
         transitionClass.matchGeometryUIImageViews(fromImageView: self.littleImageView, toImageView: toVC.littleImageView)
         transitionClass.matchSimpleUIViewGeometry(fromView: self.smallRectangle, toView: toVC.smallRectangle)

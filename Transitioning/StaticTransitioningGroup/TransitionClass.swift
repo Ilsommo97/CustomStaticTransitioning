@@ -46,6 +46,7 @@ struct SnapShotAndProperties {
     var propertiesTo : AnimatableProperties
 }
 
+
 class StaticTransition : NSObject,
                          UIViewControllerAnimatedTransitioning, // The static transition itself : the animation core
                          UINavigationControllerDelegate,  // delegate that returns the static transition for nav style
@@ -181,15 +182,7 @@ class StaticTransition : NSObject,
         animatableImageView.clipsToBounds = fromImageView.clipsToBounds
         animatableImageView.alpha = fromImageView.alpha
         // Frame computation in the from
-        if fromImageView.contentMode == .scaleAspectFit {
-            animatableImageView.frame = calculateZoomInImageFrame(image: animatableImageView.image!, forView: fromImageView)
-            print(" the from image view is in scale aspect fit mode, the frame computed is \(  animatableImageView.frame)")
-
-        } else {
-            animatableImageView.frame = fromImageView.frameInGlobalCoordinateSystem() ?? .zero
-            print(" the from image view is in scale aspect fill mode, the frame computed is \(  animatableImageView.frame)")
-
-        }
+        animatableImageView.frame = fromImageView.frameInGlobalCoordinateSystem() ?? .zero
         
         let customStruct = FromAndToView(fromView: fromImageView, toView: toImageView)
         
@@ -318,6 +311,7 @@ class StaticTransition : NSObject,
         }
         let containerView = transitionContext.containerView
         
+        toView.frame = containerView.bounds
         containerView.addSubview(toView)
         containerView.addSubview(fromView)
         
